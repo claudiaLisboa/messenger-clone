@@ -1,20 +1,17 @@
 import React from 'react';
 import '../App.css';
-import Login from "./Login"
+import Login from "./Login";
+import { Routes, Route, Router } from "react-router-dom";
 
 function App() {
   return (
     <div style={{ fontFamily :'Sono, sans-serif' }}>
-      <Router>
-        {
-          <Switch>
-            <Router path= "/" component={Login}/>
-
-          </Switch>
-        }
-      </Router>
+        <Routes>
+              <Route path= "/" component={Login}/>
+        </ Routes>
     </div>
   );
+
 }
 
 export default App;
