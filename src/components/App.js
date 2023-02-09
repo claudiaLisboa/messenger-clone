@@ -7,7 +7,7 @@ function App() {
   return (
     <div style={{ fontFamily :'Sono, sans-serif' }}>
         <Routes>
-              <Route path= "/" component={Login}/>
+              <Route path="/" element={<Login/>}/>
         </ Routes>
     </div>
   );
