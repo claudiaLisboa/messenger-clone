@@ -1,7 +1,7 @@
 
 # `Getting Messenger Clone using JS, Firebase and React App`
 
-# IntelliJ IDEA
+# [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
 ### `Created by Claudia Lisboa - For studying purpose` 
 
