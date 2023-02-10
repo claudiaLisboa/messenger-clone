@@ -22,7 +22,14 @@
     height: 66px;
     background-color: #002766;
     color: aliceblue;
+    font-family: Sono, sans-serif;
+    font-size: 1.6em;
+    text-indent: 20px;
+    letter-spacing: 2px;
+    padding-top: 20px;
+
 }
+
 
 .logo-tab{
     position: absolute;
