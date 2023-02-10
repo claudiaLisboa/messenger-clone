@@ -15,7 +15,8 @@ export const AuthProvider = ({ children })=> {
             auth.onAuthStateChanged((user) =>{
                 setUser(user);
                 setLoading(false);
-                navigate('/chats');
+                //only if have the user then navigate push the chat
+                if(user) navigate('/chats');
             })
     }, [user, navigate]);
 
