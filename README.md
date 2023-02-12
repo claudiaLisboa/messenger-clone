@@ -44,5 +44,3 @@
 
 #########################################
 
-![chats5](https://user-images.githubusercontent.com/21189063/218333187-c4e68837-33ef-4a85-99a9-429f74e064c3.png)
-
