@@ -3,29 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
-export const useAuth = () => useContext(AuthContext);
-export const AuthProvider = ({ children })=> {
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState({});
-    const navigate = useNavigate();
+export function useAuth() { return useContext(AuthContext) }
+export function AuthProvider({ children }) {
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState()
+    const navigate = useNavigate()
 
     useEffect(() =>{
             auth.onAuthStateChanged((user) =>{
-                setUser(user);
-                setLoading(false);
-                //only if have the user then navigate push the chat
-                if(user) navigate('/chats');
+                setUser(user)
+                setLoading(false)
+                navigate('/chats')
             })
-    }, [user, navigate]);
+    }, [user, navigate])
 
-    const value = { user };
+    const value = { user }
 
     return(
         <AuthContext.Provider value={value}>
-            {!loading && children}
+                  {!loading && children}
         </AuthContext.Provider>
     )
-
 }

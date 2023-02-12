@@ -7,54 +7,55 @@ import axios from "axios";
 
 
 export default  function Chats () {
-       const didMountRef = useRef(false)
-        const navigate = useNavigate();
-        const { user } = useAuth();
-        const [loading, setLoading]  = useState(true);
+        const didMountRef = useRef(false)
+        const [loading, setLoading]  = useState(true)
+        const navigate = useNavigate()
+        const { user } = useAuth()
+
     async function handleLogout() {
             await auth.signOut()
-            navigate('/');
+            navigate('/')
     }
     // add user img
-     async function getFile(url) {
-         let response = await fetch(url);
-         let data = await response.blob();
-             return new File([data],"userPhoto.jpg", {type: 'image/jpeg'});
-        }
+       async function getFile(url) {
+             let response = await fetch(url);
+             let data = await response.blob();
+                 return new File([data],"userPhoto.jpg", {type: 'image/jpeg'});
+            }
 
         useEffect(() =>{
             if (!didMountRef.current) {
-                  didMountRef.current = true
+                    didMountRef.current = true
 
                 if (!user || user === null) {
-                       navigate('/')
-                        return
+                           navigate('/')
+                            return
             }
 
-        axios.get('https://api.chatengine.io/users/me/ ',
+        axios.get( 'https://api.chatengine.io/users/me/',
             { headers: {
                     "project-id": '2b492a02-0660-454d-887b-4827497de028',
-                    "user-id": user.email,
+                    "user-name": user.email,
                     "user-secret": user.uid
                 }}
         )
             .then(() =>  setLoading(false))
 
-            .catch((error) =>{
-                    let formdata = new FormData();
+            .catch(error => {
+                    let formdata = new FormData()
                         formdata.append('email', user.email)
                         formdata.append('username',  user.email)
                         formdata.append('secret', user.uid)
 
             getFile(user.photoURL)
-                .then(avatar => {
-                    formdata.append('avatar', avatar, avatar.name)
+                    .then(avatar => {
+                        formdata.append('avatar', avatar, avatar.name)
 
-                    axios.post('https://api.chatengine.io/users/',
-                            formdata,
-                            { headers:  { "private-key":  process.env.REACT_APP_CHAT_ENGINE_KEY }}
-                                    //{ "private-key": "21231bc4-a049-4d5d-bb82-3ebf1ae34088" }}
-                     )
+                        axios.post( 'https://api.chatengine.io/users/',
+                                formdata,
+                                { headers:  { "private-key": "21231bc4-a049-4d5d-bb82-3ebf1ae34088" }}
+                                        //{ "private-key": "21231bc4-a049-4d5d-bb82-3ebf1ae34088" }}
+                         )
                         .then(() => setLoading(false))
                         .catch(error => console.log('error'. error.response))
                     })
