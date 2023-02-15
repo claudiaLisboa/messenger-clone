@@ -27,9 +27,10 @@ export default  function Chats () {
             if (!didMountRef.current) {
                     didMountRef.current = true
 
-                if (!user || user === null) {
-                           navigate('/')
-                            return
+                if (!user) {
+                    navigate('/')
+                    return
+
             }
 
         axios.get( 'https://api.chatengine.io/users/me/',
@@ -39,9 +40,9 @@ export default  function Chats () {
                     "user-secret": user.uid
                 }}
         )
-            .then(() =>  setLoading(false))
+            .then(() => setLoading(false))
 
-            .catch(error => {
+            .catch((error) => {
                     let formdata = new FormData()
                         formdata.append('email', user.email)
                         formdata.append('username',  user.email)
@@ -57,25 +58,28 @@ export default  function Chats () {
 
                          )
                         .then(() => setLoading(false))
-                        .catch(error => console.log('error'. error.response))
+                        .catch(error => console.log('error', error.response))
                     })
                 })
          }
     }, [user,navigate])
 
 
-    if(!user || loading ) return <div />
+    if(!user || loading ) return
+
 
     return(
         <div className="chats-page">
             <div className="nav-bar">
                 <div className='logo-tab'>
                       MessengerClone
-               </div>
+                </div>
+
                 <div onClick={handleLogout} className="logout-tab">
                      Logout
                 </div>
             </div>
+
             <ChatEngine
                 height='calc(100vh - 66px)'
                 projectID= {process.env.REACT_APP_CHAT_ENGINE_ID}
@@ -83,5 +87,6 @@ export default  function Chats () {
                 userSecret={user.uid}
             />
         </div>
+
     )
 }

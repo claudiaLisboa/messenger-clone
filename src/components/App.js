@@ -10,8 +10,8 @@ function App() {
     <div style={{ fontFamily :'Sono, sans-serif' }}>
         <AuthProvider>
             <Routes>
-                <Route path="/chats" element={<Chats/>}/>
                 <Route path="/" element={<Login/>}/>
+                <Route path="/chats" element={<Chats/>}/>
             </ Routes>
         </AuthProvider>
     </div>
